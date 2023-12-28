@@ -1,34 +1,31 @@
-import { createItem, deleteItem, getItems, updateItem } from '../bbddhelpers/queries';
+import {
+  createItem, deleteItem, getItems, updateItem,
+} from '../bbddhelpers/queries';
 import { Item } from '../interfaces/IfItem';
 
-async function getData(page = 1) {
+async function getData() {
   const items = await getItems();
   return {
-    test: items,
-    page,
+    items,
   };
 }
 async function deleteData(id: number = -1) {
-  if (id)
-    await deleteItem({id})
+  if (id) await deleteItem({ id });
   return {
-    test: id,
+    deleted: id,
   };
 }
 async function updateData(item: Item) {
-  if (item.id)
-    await updateItem(item);
+  if (item.id) await updateItem(item);
   return {
-    test: item.id,
-    item,
+    updated: item.id,
   };
 }
 
 async function createData({ title, details }: Item) {
   await createItem({ title, details });
   return {
-
-    val: 'test',
+    created: true,
   };
 }
 
