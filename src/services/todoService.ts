@@ -1,4 +1,4 @@
-import { createItem, getItems } from '../bbddhelpers/queries';
+import { createItem, deleteItem, getItems, updateItem } from '../bbddhelpers/queries';
 import { Item } from '../interfaces/IfItem';
 
 async function getData(page = 1) {
@@ -8,15 +8,19 @@ async function getData(page = 1) {
     page,
   };
 }
-async function deleteData(id = null) {
+async function deleteData(id: number = -1) {
+  if (id)
+    await deleteItem({id})
   return {
     test: id,
   };
 }
-async function updateData(id = null, data = {}) {
+async function updateData(item: Item) {
+  if (item.id)
+    await updateItem(item);
   return {
-    test: id,
-    data,
+    test: item.id,
+    item,
   };
 }
 
