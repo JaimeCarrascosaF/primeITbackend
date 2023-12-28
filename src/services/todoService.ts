@@ -1,6 +1,11 @@
+import { createItem, getItems } from '../bbddhelpers/queries';
+import { Item } from '../interfaces/IfItem';
+
 async function getData(page = 1) {
+  const items = await getItems();
   return {
-    test: page,
+    test: items,
+    page,
   };
 }
 async function deleteData(id = null) {
@@ -14,9 +19,11 @@ async function updateData(id = null, data = {}) {
     data,
   };
 }
-async function createData(data) {
+
+async function createData({ title, details }: Item) {
+  await createItem({ title, details });
   return {
-    data,
+
     val: 'test',
   };
 }

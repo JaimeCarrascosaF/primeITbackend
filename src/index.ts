@@ -1,7 +1,7 @@
 import express from 'express';
+import apiRouter from './routes/routes';
 
 const bodyParser = require('body-parser');
-const apiRouter = require('./routes/routes.ts');
 
 const app = express();
 app.get('/', (_req, res) => {

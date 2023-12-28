@@ -1,39 +1,39 @@
 import todoService from '../services/todoService';
 
-async function getEntry(req, res, next) {
+async function getEntry(req: any, res: any, next: any) {
   try {
     res.json(await todoService.getData(req.query.page));
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error while getting programming languages', err.message);
     next(err);
   }
 }
-async function deleteEntry(req, res, next) {
+async function deleteEntry(req: any, res: any, next: any) {
   try {
     res.json(await todoService.deleteData(req.params.id));
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error while getting programming languages', err.message);
     next(err);
   }
 }
-async function updateEntry(req, res, next) {
+async function updateEntry(req: any, res: any, next: any) {
   try {
     res.json(await todoService.updateData(req.params.id, req.body));
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error while getting programming languages', err.message);
     next(err);
   }
 }
-async function createEntry(req, res, next) {
+async function createEntry(req: any, res: any, next: any) {
   try {
     res.json(await todoService.createData(req.body));
-  } catch (err) {
+  } catch (err: any) {
     console.error('Error while getting programming languages', err.message);
     next(err);
   }
 }
 
-module.exports = {
+export default {
   getEntry,
   deleteEntry,
   updateEntry,
