@@ -1,6 +1,5 @@
 async function errorHandler(error: any, req: any, res: any, next: any) {
   const customError: boolean = !(error.constructor.name === 'NodeError' || error.constructor.name === 'SyntaxError');
-  console.log('error handler called');
   if (error instanceof Error) { console.error('Server error: ', error); }
 
   res.status(error.statusCode || 500).json({
@@ -15,4 +14,17 @@ async function errorHandler(error: any, req: any, res: any, next: any) {
   next(error);
 }
 
+async function defaultErrorHandler(req:any, res:any) {
+  res.status(404).json({
+    response: 'Error',
+    error: {
+      type: 'Not found',
+      path: req.path,
+      statusCode: 404,
+      message: 'Resource not found',
+    },
+  });
+}
+
 export default errorHandler;
+export { errorHandler, defaultErrorHandler };
