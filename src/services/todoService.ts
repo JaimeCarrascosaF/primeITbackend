@@ -1,7 +1,7 @@
 import {
   createItem, deleteItem, getItems, updateItem,
 } from '../bbddhelpers/queries';
-import { Item } from '../interfaces/IfItem';
+import { Item } from '../types/Item';
 
 async function getData() {
   const items = await getItems();

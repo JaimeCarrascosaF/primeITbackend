@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { Item } from '../interfaces/IfItem';
+import { Item } from '../types/Item';
 
 const pool = new Pool({
   user: 'appUser',

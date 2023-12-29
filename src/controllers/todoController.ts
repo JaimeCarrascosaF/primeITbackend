@@ -1,5 +1,5 @@
 import todoService from '../services/todoService';
-import { Item } from '../interfaces/IfItem';
+import { Item } from '../types/Item';
 
 async function getEntry(req: any, res: any, next: any) {
   try {
