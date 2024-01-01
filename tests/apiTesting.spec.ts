@@ -1,22 +1,22 @@
 import { describe, expect } from '@jest/globals';
 import { Item } from '../src/types/Item';
-import app from '../src/app/app';
-
 const request = require('supertest');
 
+
+const baseURL = 'http://localhost:5000/api';
 describe('GET testing', () => {
   it('should return 200', async () => {
-    const response = await request(app).get('/api/list');
+    const response = await request(baseURL).get('/list');
     expect(response.statusCode).toBe(200);
     expect(response.body.error).toBe(undefined);
   });
   it('should return 404', async () => {
-    const response = await request(app).get('/api/undefinedRoute');
+    const response = await request(baseURL).get('/undefinedRoute');
     expect(response.statusCode).toBe(404);
     expect(response.body.error).not.toBe(undefined);
   });
   it('should return list of todos', async () => {
-    const response = await request(app).get('/api/list');
+    const response = await request(baseURL).get('/list');
     expect(response.body.items.length >= 1).toBe(true);
   });
 });
@@ -29,13 +29,13 @@ describe('POST and DELETE testing', () => {
     created: true,
   };
   it('should add an item and then remove it', async () => {
-    const response = await request(app).post('/api/create').send(newTodo);
+    const response = await request(baseURL).post('/create').send(newTodo);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(responseCreated);
-    const getItems = await request(app).get('/api/list');
+    const getItems = await request(baseURL).get('/list');
     const { items } = getItems.body;
     const newItem = items.find((el: Item) => el.title === 'jest test example');
-    const responseDeletedQuery = await request(app).delete(`/api/delete/?id=${newItem.id}`);
+    const responseDeletedQuery = await request(baseURL).delete(`/delete/?id=${newItem.id}`);
     const responseDeleted = { deleted: `${newItem.id}` };
     expect(responseDeletedQuery.body).toEqual(responseDeleted);
   });
@@ -54,25 +54,25 @@ describe('PUT testing', () => {
     created: true,
   };
   it('should add an item and then remove it', async () => {
-    const response = await request(app).post('/api/create').send(newTodo);
+    const response = await request(baseURL).post('/create').send(newTodo);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(responseCreated);
 
 
-    let getItems = await request(app).get('/api/list');
+    let getItems = await request(baseURL).get('/list');
     let { items } = getItems.body;
     let newItem = items.find((el: Item) => el.title === 'jest test example');
     modifiedTodo.id = newItem.id;
-    await request(app).put('/api/update/').send(modifiedTodo);
+    await request(baseURL).put('/update/').send(modifiedTodo);
 
-    getItems = await request(app).get('/api/list');
+    getItems = await request(baseURL).get('/list');
     items = getItems.body.items;
     newItem = items.find((el: Item) => el.title === 'jest test modified' && el.details === 'jest test example details modified');
 
     delete modifiedTodo.id;
     expect(newItem).toMatchObject(modifiedTodo);
 
-    const responseDeletedQuery = await request(app).delete(`/api/delete/?id=${newItem.id}`);
+    const responseDeletedQuery = await request(baseURL).delete(`/delete/?id=${newItem.id}`);
     const responseDeleted = { deleted: `${newItem.id}` };
     expect(responseDeletedQuery.body).toEqual(responseDeleted);
   });
