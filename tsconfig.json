@@ -12,6 +12,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
+    "types": ["node", "jest"],
     "baseUrl": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true

@@ -1,12 +1,14 @@
 import { Pool } from 'pg';
-import { Item } from '../interfaces/IfItem';
+import { Item } from '../types/Item';
+
+require('dotenv').config();
 
 const pool = new Pool({
-  user: 'appUser',
-  host: 'localhost',
-  database: 'todo',
-  password: 'primeIT',
-  port: 5432,
+  user: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
 });
 
 async function getItems() {
