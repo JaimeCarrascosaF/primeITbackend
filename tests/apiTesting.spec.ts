@@ -3,7 +3,6 @@ import { Item } from '../src/types/Item';
 
 const request = require('supertest');
 
-
 const baseURL = 'http://localhost:5000/api';
 describe('GET testing', () => {
   it('should return 200', async () => {
@@ -58,7 +57,6 @@ describe('PUT testing', () => {
     const response = await request(baseURL).post('/create').send(newTodo);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(responseCreated);
-
 
     let getItems = await request(baseURL).get('/list');
     let { items } = getItems.body;
