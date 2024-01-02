@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://github.com/JaimeCarrascosaF/primeITbackend",
+  "license": "CC-BY-NC-1.0",
   "scripts": {
     "test": "jest --detectOpenHandles --colors",
     "lint": "eslint src/** tests/** --fix --cache",
@@ -11,7 +13,6 @@
     "start:prod": "npm run build && node ./build/index.js"
   },
   "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/jest": "^25.2.3",
     "@types/node": "^20.10.6",
