@@ -1,6 +1,8 @@
 import express from 'express';
 import apiRouter from '../routes/routes';
-import errorHandler, { defaultErrorHandler } from '../controllers/errorController';
+import errorHandler, {
+  defaultErrorHandler,
+} from '../controllers/errorController';
 
 const cors = require('cors');
 

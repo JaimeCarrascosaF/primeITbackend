@@ -1,6 +1,7 @@
 # PrimeIT backend TO-DO list
 
 ### Author: Jaime Carrascosa Fernández
+
 <inf.jaime1@gmail.com>
 
 ## Requirements
@@ -20,7 +21,12 @@
 ## Running the project
 
     $ npm run start
-## Testing the project
+
+#### Build and serve
+
+    $ npm run start:prod
+
+#### Testing the project
 
 On a separated terminal, run the project, then:
 
