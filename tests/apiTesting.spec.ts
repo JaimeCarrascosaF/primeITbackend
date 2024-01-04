@@ -35,7 +35,9 @@ describe('POST and DELETE testing', () => {
     const getItems = await request(baseURL).get('/list');
     const { items } = getItems.body;
     const newItem = items.find((el: Item) => el.title === 'jest test example');
-    const responseDeletedQuery = await request(baseURL).delete(`/delete/?id=${newItem.id}`);
+    const responseDeletedQuery = await request(baseURL).delete(
+      `/delete/?id=${newItem.id}`,
+    );
     const responseDeleted = { deleted: `${newItem.id}` };
     expect(responseDeletedQuery.body).toEqual(responseDeleted);
   });
@@ -66,12 +68,17 @@ describe('PUT testing', () => {
 
     getItems = await request(baseURL).get('/list');
     items = getItems.body.items;
-    newItem = items.find((el: Item) => el.title === 'jest test modified' && el.details === 'jest test example details modified');
+    newItem = items.find(
+      (el: Item) => el.title === 'jest test modified'
+        && el.details === 'jest test example details modified',
+    );
 
     delete modifiedTodo.id;
     expect(newItem).toMatchObject(modifiedTodo);
 
-    const responseDeletedQuery = await request(baseURL).delete(`/delete/?id=${newItem.id}`);
+    const responseDeletedQuery = await request(baseURL).delete(
+      `/delete/?id=${newItem.id}`,
+    );
     const responseDeleted = { deleted: `${newItem.id}` };
     expect(responseDeletedQuery.body).toEqual(responseDeleted);
   });
