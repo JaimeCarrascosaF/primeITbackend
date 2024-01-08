@@ -1,8 +1,10 @@
+const NODE_ERROR: string = 'NodeError';
+const SYNTAX_ERROR: string =  'SyntaxError';
+
 async function errorHandler(error: any, req: any, res: any, next: any) {
-  const customError: boolean = !(
-    error.constructor.name === 'NodeError'
-    || error.constructor.name === 'SyntaxError'
-  );
+  const posibleErrors: String[] =  [NODE_ERROR, SYNTAX_ERROR];
+  
+  const customError: boolean = posibleErrors.includes(error.constructor.name);
   if (error instanceof Error) {
     console.error('Server error: ', error);
   }
@@ -10,7 +12,7 @@ async function errorHandler(error: any, req: any, res: any, next: any) {
   res.status(error.statusCode || 500).json({
     response: 'Error',
     error: {
-      type: customError === false ? 'UnhandledError' : error.constructor.name,
+      type: customError ? 'UnhandledError' : error.constructor.name,
       path: req.path,
       statusCode: error.statusCode || 500,
       message: error.message,
